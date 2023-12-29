@@ -1,6 +1,8 @@
 import { Router } from "express"
 import Category from '../models/category.model.js'
+import Transaction from "../models/transaction.model.js";
 import CategoryMongoDao from "../daos/category.dao.js"
+import TransactionMongoDao from "../daos/transaction.dao.js";
 import { validateSchema } from "../middlewares/validator.middleware.js"
 import ControllerCategory from "../controllers/category.controller.js"
 import { createCategorySchema } from "../schemas/category.schema.js"

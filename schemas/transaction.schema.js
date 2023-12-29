@@ -1,16 +1,16 @@
 import { z } from 'zod'
 
-export const createIncomeSchema = z.object({
-    user_id: z.any({
+export const createTransactionSchema = z.object({
+    user: z.any({
         required_error: 'Usuario requerido'
     }),
-    description: z.string().optional(),
+    note: z.string().optional(),
     amount: z.number({
         required_error: "Monto necesario"
     }).optional(),
     date: z.string().datetime().optional(),
-    category_id: z.any({
+    category: z.any({
         required_error: 'Categoria requerida'
-    })
-
+    }),
+    type: z.string()
 })

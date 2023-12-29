@@ -1,28 +1,34 @@
 import mongoose from 'mongoose';
 
-const spentSchema = new mongoose.Schema({
-    user_id: {
+const transactionSchema = new mongoose.Schema({
+    user: {
         type: String,
         required: true
     },
-    description: {
+    note: {
         type: String,
         required: false
     },
     date: {
         type: Date,
-        default: Date.now
+        required: true
     },
     amount: {
         type: Number,
         required: true
     },
-    category_id: {
+    category: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Category',
+        required: true
+    },
+    type: {
         type: String,
+        enum: ['income', 'bill'],
         required: true
     }
-},{
+}, {
     timestamps: true
 })
 
-export default mongoose.model('Spent', spentSchema)
+export default mongoose.model('Transaction', transactionSchema)

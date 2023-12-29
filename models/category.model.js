@@ -1,12 +1,7 @@
 import mongoose from 'mongoose';
 
 const categorySchema = new mongoose.Schema({
-    // user_id: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'User',
-    //     required: true
-    // },
-    user_id: {
+    user: {
         type: String,
         required: true
     },
@@ -16,9 +11,10 @@ const categorySchema = new mongoose.Schema({
     },
     type: {
         type: String,
+        enum: ['income', 'bill'],
         required: true
     }
-},{
+}, {
     timestamps: true
 })
 

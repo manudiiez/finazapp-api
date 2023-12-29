@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
 export const createCategorySchema = z.object({
-    user_id: z.any({
+    user: z.any({
         required_error: 'Usuario requerido'
     }).optional(),
     name: z.string({

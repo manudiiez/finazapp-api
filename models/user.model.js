@@ -2,7 +2,12 @@ import mongoose from "mongoose";
 import bcrypt from 'bcryptjs'
 
 const userSchema = new mongoose.Schema({
-    username: {
+    firstname: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    lastname: {
         type: String,
         required: true,
         trim: true
@@ -17,7 +22,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     }
-    
+
 }, {
     timestamps: true
 })

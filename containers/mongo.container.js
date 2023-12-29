@@ -23,7 +23,7 @@ class ContainerMongodb {
 
     async getById(id) {
         try {
-            return await this.model.findById(id)
+            return await this.model.findById(id).lean()
         } catch (error) {
             throw new Error(error)
         }
