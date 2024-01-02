@@ -7,7 +7,7 @@ class ControllerAuth {
         this.containerCategory = containerCategory
     }
 
-    signup = async (req, res) => {
+    register = async (req, res) => {
         try {
             const { email, password, firstname, lastname } = req.body
             const userFound = await this.container.getByEmail(email)
@@ -38,7 +38,7 @@ class ControllerAuth {
         }
     }
 
-    signin = async (req, res) => {
+    login = async (req, res) => {
         try {
             const { email, password } = req.body
             const userFound = await this.container.getByEmail(email)

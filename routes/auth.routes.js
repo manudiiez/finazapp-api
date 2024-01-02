@@ -11,7 +11,7 @@ const container = new AuthMongoDao(User)
 const containerCategory = new CategoryMongoDao(Category)
 const controller = new ControllerAuth(container, containerCategory)
 
-router.post('/signup', controller.signup)
-router.post('/signin', controller.signin)
+router.post('/register', controller.register)
+router.post('/login', controller.login)
 
 export default router   
