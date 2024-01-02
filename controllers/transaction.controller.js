@@ -1,3 +1,5 @@
+import { formatNumber } from "../utils/func.js";
+
 class ControllerTransaction {
 
     constructor(container, categoryContainer) {
@@ -15,8 +17,11 @@ class ControllerTransaction {
             const bills = await this.container.getUserResume(req.user.id, startDate, endDate, 'bill')
             const totalIncomes = await this.container.getUserResume(req.user.id, new Date(null), endDate, 'income')
             const totalBills = await this.container.getUserResume(req.user.id, new Date(null), endDate, 'bill')
+            // res.status(200).json({
+            //     incomes: (incomes[0]?.cant || 0).toFixed(2), bills: (bills[0]?.cant || 0).toFixed(2), balance: ((incomes[0]?.cant || 0) - (bills[0]?.cant) || 0).toFixed(2), total: ((totalIncomes[0]?.cant || 0) - (totalBills[0]?.cant || 0)).toFixed(2)
+            // })
             res.status(200).json({
-                incomes: (incomes[0]?.cant || 0).toFixed(2), bills: (bills[0]?.cant || 0).toFixed(2), balance: ((incomes[0]?.cant || 0) - (bills[0]?.cant) || 0).toFixed(2), total: ((totalIncomes[0]?.cant || 0) - (totalBills[0]?.cant || 0)).toFixed(2)
+                incomes: formatNumber(incomes[0]?.cant || 0), bills: formatNumber(bills[0]?.cant || 0), balance: formatNumber((incomes[0]?.cant || 0) - (bills[0]?.cant) || 0), total: formatNumber((totalIncomes[0]?.cant || 0) - (totalBills[0]?.cant || 0))
             })
         } catch (error) {
             res.status(500).json({ message: error.message })
