@@ -21,7 +21,7 @@ class ControllerTransaction {
             //     incomes: (incomes[0]?.cant || 0).toFixed(2), bills: (bills[0]?.cant || 0).toFixed(2), balance: ((incomes[0]?.cant || 0) - (bills[0]?.cant) || 0).toFixed(2), total: ((totalIncomes[0]?.cant || 0) - (totalBills[0]?.cant || 0)).toFixed(2)
             // })
             res.status(200).json({
-                incomes: formatNumber(incomes[0]?.cant || 0), bills: formatNumber(bills[0]?.cant || 0), balance: formatNumber((incomes[0]?.cant || 0) - (bills[0]?.cant) || 0), total: formatNumber((totalIncomes[0]?.cant || 0) - (totalBills[0]?.cant || 0))
+                incomes: formatNumber(incomes[0]?.cant || 0).substring(1), bills: formatNumber(bills[0]?.cant || 0).substring(1), balance: formatNumber((incomes[0]?.cant || 0) - (bills[0]?.cant) || 0), total: formatNumber((totalIncomes[0]?.cant || 0) - (totalBills[0]?.cant || 0))
             })
         } catch (error) {
             res.status(500).json({ message: error.message })
