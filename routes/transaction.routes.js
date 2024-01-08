@@ -20,5 +20,6 @@ router.get('/item/:id', authRequired, controller.getById)
 router.put('/:id', authRequired, controller.updateById)
 router.delete('/:id', authRequired, controller.deleteById)
 router.get('/resume', authRequired, controller.getResume)
+router.get('/charts', authRequired, controller.getCharts)
 
 export default router   

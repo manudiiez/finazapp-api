@@ -9,9 +9,16 @@ export default class CategoryMongoDao extends ContainerMongodb {
         super(model)
     }
 
-    async getUserCategories(id) {
+    async getUserCategories(id, type) {
         try {
-            return await this.model.find({ user: id }).lean()
+
+            let categorias;
+            if (type) {
+                categorias = await this.model.find({ user: id, type: type }).lean()
+            } else {
+                categorias = await this.model.find({ user: id }).lean()
+            }
+            return categorias;
 
         } catch (error) {
             throw new Error(error)

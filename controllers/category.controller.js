@@ -6,8 +6,19 @@ class ControllerCategory {
 
     getAll = async (req, res) => {
         try {
-            console.log(req.user);
-            res.status(200).json(await this.container.getUserCategories(req.user.id))
+            const categories = await this.container.getUserCategories(req.user.id)
+            const incomeCategories = categories.filter(category => category.type === 'income');
+            const billCategories = categories.filter(category => category.type === 'bill');
+            res.status(200).json({
+                income: {
+                    default: (incomeCategories.filter(category => category.name === 'Sin categorizar'))[0],
+                    list: incomeCategories
+                },
+                bill: {
+                    default: (billCategories.filter(category => category.name === 'Sin categorizar'))[0],
+                    list: billCategories
+                },
+            })
         } catch (error) {
             res.status(500).json({ message: error.message })
         }

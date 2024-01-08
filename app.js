@@ -22,5 +22,6 @@ app.use("/api/auth", authRoutes)
 app.use("/api/category", categoryRoutes)
 app.use("/api/transaction", transactionRoutes)
 app.use("/api/goal", goalRoutes)
+
 /* --------------------------------- EXPORT --------------------------------- */
 export default app

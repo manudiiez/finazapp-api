@@ -17,16 +17,35 @@ class ControllerTransaction {
             const bills = await this.container.getUserResume(req.user.id, startDate, endDate, 'bill')
             const totalIncomes = await this.container.getUserResume(req.user.id, new Date(null), endDate, 'income')
             const totalBills = await this.container.getUserResume(req.user.id, new Date(null), endDate, 'bill')
-            // res.status(200).json({
-            //     incomes: (incomes[0]?.cant || 0).toFixed(2), bills: (bills[0]?.cant || 0).toFixed(2), balance: ((incomes[0]?.cant || 0) - (bills[0]?.cant) || 0).toFixed(2), total: ((totalIncomes[0]?.cant || 0) - (totalBills[0]?.cant || 0)).toFixed(2)
-            // })
             res.status(200).json({
-                incomes: formatNumber(incomes[0]?.cant || 0).substring(1), bills: formatNumber(bills[0]?.cant || 0).substring(1), balance: formatNumber((incomes[0]?.cant || 0) - (bills[0]?.cant) || 0), total: formatNumber((totalIncomes[0]?.cant || 0) - (totalBills[0]?.cant || 0))
+                incomes: formatNumber(incomes[0]?.cant || 0).substring(1), bills: formatNumber(bills[0]?.cant || 0).substring(1), balance: formatNumber((incomes[0]?.cant || 0) - (bills[0]?.cant || 0)), total: formatNumber((totalIncomes[0]?.cant || 0) - (totalBills[0]?.cant || 0))
             })
         } catch (error) {
             res.status(500).json({ message: error.message })
         }
     }
+    getCharts = async (req, res) => {
+        try {
+            const type = req.query.type || 'general';
+            const year = req.query.year || new Date().getFullYear();
+            let categories = [];
+            let month = [];
+
+            if (type !== 'general') {
+                month = await this.container.getTransactionsByCategoryMonth(req.user.id, type, year);
+                categories = await this.container.getIncomeDataForChart(req.user.id, type, year);
+            } else {
+                month = await this.container.getIncomesAndExpensesByMonth(req.user.id, year)
+                categories = await this.container.getIncomeAndExpenses(req.user.id, year);
+            }
+            res.status(200).json({
+                categories,
+                month,
+            });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    };
 
     getAll = async (req, res) => {
         try {
