@@ -18,8 +18,8 @@ class ControllerAuth {
             newUser.lastname = lastname
             newUser.password = newUser.encryptPassword(password);
             const userSaved = await newUser.save()
-            await this.containerCategory.save({ user: userSaved._id, name: "Sin categorizar", type: "income" })
-            await this.containerCategory.save({ user: userSaved._id, name: "Sin categorizar", type: "bill" })
+            await this.containerCategory.save({ user: userSaved._id, name: "Sin categorizar", type: "income", color: '#909090' })
+            await this.containerCategory.save({ user: userSaved._id, name: "Sin categorizar", type: "bill", color: '#909090' })
             jwt.sign({ email: userSaved.email, id: userSaved._id }, TOKEN_SECRET, {}, (err, token) => {
                 if (err) throw err;
                 res.status(200).json({

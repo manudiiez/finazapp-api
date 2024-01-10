@@ -39,7 +39,7 @@ class ControllerGoal {
                 }
                 if (category.length !== 0) return res.status(404).json({ error: "Ya existe una categoria o meta con ese nombre, intente otro." })
                 if (date > new Date(req.body.deadline)) return res.status(404).json({ error: "No puede crear una meta con esas caracteristicas" })
-                const categorySaved = await this.containerCategory.save({ user: req.body.user, name: req.body.category, type: "bill" })
+                const categorySaved = await this.containerCategory.save({ user: req.body.user, name: req.body.category, type: "bill", color: req.body.color })
                 res.status(201).json(await this.container.save({ user: req.body.user, category: categorySaved._id, deadline: new Date(req.body.deadline), date: date, amount: req.body.amount }))
             } else {
                 res.status(404).json({ error: "Solo puede crear ganancias para su usuario" })

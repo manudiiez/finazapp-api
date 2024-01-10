@@ -234,6 +234,10 @@ export default class TransactionMongoDao extends ContainerMongodb {
                 'Sep', 'Oct', 'Nov', 'Dic',
             ];
 
+            if (response.length === 0) {
+                return []
+            }
+
             const maxValue = response.reduce((max, obj) => (obj.month > max ? obj.month : max), response[0].month);
 
             const ingresosPorMesYCategoria = []
@@ -263,7 +267,7 @@ export default class TransactionMongoDao extends ContainerMongodb {
         }
     }
 
-    async getIncomeDataForChart(id, type, year) {
+    async getDataForChart(id, type, year) {
         try {
             const response = await this.model.aggregate([
                 {

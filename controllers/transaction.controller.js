@@ -33,7 +33,7 @@ class ControllerTransaction {
 
             if (type !== 'general') {
                 month = await this.container.getTransactionsByCategoryMonth(req.user.id, type, year);
-                categories = await this.container.getIncomeDataForChart(req.user.id, type, year);
+                categories = await this.container.getDataForChart(req.user.id, type, year);
             } else {
                 month = await this.container.getIncomesAndExpensesByMonth(req.user.id, year)
                 categories = await this.container.getIncomeAndExpenses(req.user.id, year);

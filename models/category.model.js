@@ -13,6 +13,10 @@ const categorySchema = new mongoose.Schema({
         type: String,
         enum: ['income', 'bill'],
         required: true
+    },
+    color: {
+        type: String,
+        required: true
     }
 }, {
     timestamps: true
