@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon ."
+    "dev": "nodemon --env-file .env ."
   },
   "keywords": [],
   "author": "",

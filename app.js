@@ -7,11 +7,12 @@ import authRoutes from './routes/auth.routes.js'
 import categoryRoutes from './routes/category.routes.js'
 import transactionRoutes from './routes/transaction.routes.js'
 import goalRoutes from './routes/goal.routes.js'
+import { ORIGIN_URI } from './config.js'
 
 /* ----------------------------------- APP ---------------------------------- */
 const app = express()
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: ORIGIN_URI,
     credentials: true
 }))
 app.use(cookieParser());
