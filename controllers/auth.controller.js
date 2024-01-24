@@ -33,7 +33,6 @@ class ControllerAuth {
                 });
             });
         } catch (error) {
-            console.log(error);
             res.status(400).json({ error: error.message })
         }
     }
@@ -58,8 +57,19 @@ class ControllerAuth {
                 });
             });
         } catch (error) {
-            console.log(error);
             res.status(400).json({ error: error.message })
+        }
+    }
+
+    update = async (req, res) => {
+        try {
+            console.log(req.user);
+            const userFound = await this.container.getById(req.user.id)
+            if (!userFound) return res.status(404).json({ error: "No existe ese usuario" })
+            res.status(200).json(await this.container.updateById(req.user.id, req.body))
+            // res.status(200).json(userFound)
+        } catch (error) {
+            res.status(404).json({ error: `${error}` })
         }
     }
 }
